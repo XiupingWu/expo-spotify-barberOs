@@ -1,13 +1,18 @@
+/* eslint-disable prettier/prettier */
 import * as React from 'react';
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // navigation
 import TabNavigation from './TabNavigation';
+import DrawerNavigation from './DrawerNavigation';
 
 // screens
 import ModalMusicPlayer from '../screens/ModalMusicPlayer';
 import ModalMoreOptions from '../screens/ModalMoreOptions';
+
+// constants
+import { device } from '../constants';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,14 +24,25 @@ function RootStack() {
           presentation: 'fullScreenModal'
         }}
       >
-        <Stack.Screen
-          name="TabNavigation"
-          component={TabNavigation}
-          options={{
-            headerShown: false
-          }}
-        />
-
+        {
+          device.isMobile ? (
+            <Stack.Screen
+              name="TabNavigation"
+              component={TabNavigation}
+              options={{
+                headerShown: false,
+              }}
+            />
+          ) : (
+            <Stack.Screen
+              name="DrawerNavigation"
+              component={DrawerNavigation}
+              options={{
+                headerShown: false,
+              }}
+            />
+          )
+        }
         <Stack.Screen
           name="ModalMusicPlayer"
           component={ModalMusicPlayer}

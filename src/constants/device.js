@@ -8,6 +8,9 @@ const web = Platform.OS === 'web';
 const windowInfo = Dimensions.get('window');
 const { height, width } = windowInfo;
 const aspectRatio = height / width;
+const isMobile = width < 768;
+const isTablet = width >= 768 && width < 1024;
+const isDesktop = width >= 1024;
 
 // is iPad
 const { isPad } = Platform;
@@ -31,5 +34,8 @@ export default {
   iPhoneNotch,
   isPad,
   web,
-  width
+  width,
+  isMobile,
+  isTablet,       // Add this
+  isDesktop,   
 };
